@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "qcustomplot.h"
 namespace Ui {
 class MainWindow;
 }
@@ -15,8 +15,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void realtimeDataSlotFirst();
+    void realtimeDataSlotSecond();
+
 private:
-    Ui::MainWindow *ui;
+  Ui::MainWindow *ui;
+  QTimer dataTimerFirst;
+  QTimer dataTimerSecond;
 };
 
 #endif // MAINWINDOW_H
