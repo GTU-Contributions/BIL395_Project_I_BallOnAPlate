@@ -24,9 +24,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    getdatathread.cpp \
+    connectionthread.cpp
 
 HEADERS  += mainwindow.h \
-    drawxycoorthread.h
+    drawxycoorthread.h \
+    getdatathread.h \
+    connectionthread.h
 
 FORMS    += mainwindow.ui
