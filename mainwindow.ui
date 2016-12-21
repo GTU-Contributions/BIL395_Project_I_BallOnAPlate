@@ -20,25 +20,15 @@
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>0</y>
-      <width>331</width>
-      <height>481</height>
+      <x>800</x>
+      <y>10</y>
+      <width>361</width>
+      <height>501</height>
      </rect>
     </property>
     <property name="title">
      <string>Graphics</string>
     </property>
-    <widget class="QGraphicsView" name="graphicsViewX">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>40</y>
-       <width>256</width>
-       <height>192</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
@@ -50,16 +40,6 @@
      </property>
      <property name="text">
       <string>x-t Graphics</string>
-     </property>
-    </widget>
-    <widget class="QGraphicsView" name="graphicsViewY">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>260</y>
-       <width>256</width>
-       <height>192</height>
-      </rect>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -79,6 +59,26 @@
      </property>
      <property name="text">
       <string>y-t Graphics</string>
+     </property>
+    </widget>
+    <widget class="QCustomPlot" name="customPlot" native="true">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QCustomPlot" name="customPlotSecond" native="true">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>270</y>
+       <width>256</width>
+       <height>192</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -114,7 +114,7 @@
       <x>20</x>
       <y>370</y>
       <width>461</width>
-      <height>331</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -158,6 +158,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
