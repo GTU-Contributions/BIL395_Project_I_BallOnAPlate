@@ -1,6 +1,7 @@
 #include "connectionthread.h"
 
-ConnectionThread::ConnectionThread()
+ConnectionThread::ConnectionThread(QObject *parent):
+     QThread(parent)
 {
 
 }

@@ -9,7 +9,7 @@ class ConnectionThread : public QThread
 public:
     explicit ConnectionThread(QObject *parent = 0);
     void run();
-    ConnectionThread();
+
 signals:
     void startConnection();
 public slots:
