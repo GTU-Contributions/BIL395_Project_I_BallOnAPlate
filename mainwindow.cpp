@@ -11,6 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(connectionTh,SIGNAL(startConnection()),this,SLOT(isConnect()));
     connectionTh->start();
 
+    //Kaan Uçar
+    drawer = new Drawer(this);
+    ui->shapeDrawer->setScene(drawer);
+    ui->shapeDrawer->setRenderHint(QPainter::Antialiasing);
+    QPen blackPen(Qt::black);
+    blackPen.setWidth(2);
+    //Kaan Uçar
+
     //Mutlu Polatcan
     ui->customPlot->addGraph(); // blue line
     ui->customPlot->addGraph(); // red line

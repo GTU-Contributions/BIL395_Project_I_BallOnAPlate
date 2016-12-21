@@ -7,7 +7,7 @@
 #include <QtCore>
 #include "connectionthread.h"
 #include "qcustomplot.h"
-
+#include "drawer.h"
 namespace Ui {
 class MainWindow;
 }
@@ -27,6 +27,7 @@ private:
     QGraphicsScene *scene ;
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
+    Drawer * drawer;
     qreal xCoor;
     qreal yCoor;
 
