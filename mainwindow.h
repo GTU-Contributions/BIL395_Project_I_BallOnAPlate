@@ -6,6 +6,7 @@
 
 #include <QtCore>
 #include "connectionthread.h"
+#include "qcustomplot.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,12 +25,18 @@ public:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene ;
+    QTimer dataTimerFirst;
+    QTimer dataTimerSecond;
     qreal xCoor;
     qreal yCoor;
 
 public slots:
     void isConnect();
    //void updateXYCoordinates(qreal x, qreal y);
+
+private slots:
+    void realtimeDataSlotFirst();
+    void realtimeDataSlotSecond();
 };
 
 #endif // MAINWINDOW_H

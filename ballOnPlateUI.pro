@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp \
     mainwindow.cpp \
     getdatathread.cpp \
-    connectionthread.cpp
+    connectionthread.cpp \
+    qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
     drawxycoorthread.h \
     getdatathread.h \
-    connectionthread.h
+    connectionthread.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui
