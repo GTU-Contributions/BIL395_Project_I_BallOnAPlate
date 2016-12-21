@@ -39,7 +39,6 @@ public slots:
 private slots:
     void realtimeDataSlotFirst();
     void realtimeDataSlotSecond();
-    Drawer * drawer;
 };
 
 #endif // MAINWINDOW_H
