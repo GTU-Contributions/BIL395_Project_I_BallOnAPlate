@@ -79,19 +79,6 @@
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>300</width>
-      <height>300</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>X-Y Coordinates</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
@@ -103,6 +90,35 @@
     </property>
     <property name="text">
      <string>3D</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="xyCoordinates">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>false</bool>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="xyCoordinatesLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>10</y>
+      <width>110</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>X-Y Coordinates</string>
     </property>
    </widget>
   </widget>
