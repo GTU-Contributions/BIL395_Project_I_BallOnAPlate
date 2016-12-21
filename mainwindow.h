@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include "drawer.h"
 
 #include <QtCore>
 #include "connectionthread.h"
@@ -38,6 +39,7 @@ public slots:
 private slots:
     void realtimeDataSlotFirst();
     void realtimeDataSlotSecond();
+    Drawer * drawer;
 };
 
 #endif // MAINWINDOW_H
