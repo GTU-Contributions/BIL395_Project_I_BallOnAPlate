@@ -27,12 +27,14 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     getdatathread.cpp \
     connectionthread.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    drawer.cpp
 
 HEADERS  += mainwindow.h \
     drawxycoorthread.h \
     getdatathread.h \
     connectionthread.h \
-    qcustomplot.h
+    qcustomplot.h \
+    drawer.h
 
 FORMS    += mainwindow.ui
