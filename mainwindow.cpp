@@ -21,13 +21,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Mutlu Polatcan
     ui->customPlot->addGraph(); // blue line
-    ui->customPlot->addGraph(); // red line
+
     ui->customPlot->graph(0)->setPen(QPen(QColor(40, 110, 255)));
-    ui->customPlot->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+
     ui->customPlotSecond->addGraph(); // blue line
-    ui->customPlotSecond->addGraph(); // red line
+
     ui->customPlotSecond->graph(0)->setPen(QPen(QColor(40, 110, 255)));
-    ui->customPlotSecond->graph(1)->setPen(QPen(QColor(255, 110, 40)));
+
 
     QSharedPointer <QCPAxisTickerTime> timeTickerFirst(new QCPAxisTickerTime);
     QSharedPointer <QCPAxisTickerTime> timeTickerSecond(new QCPAxisTickerTime);
@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->customPlot->axisRect()->setupFullAxesBox();
     ui->customPlotSecond->axisRect()->setupFullAxesBox();
     ui->customPlot->yAxis->setRange(0, 1023);
-    ui->customPlotSecond->yAxis->setRange(0, 800);
+    ui->customPlotSecond->yAxis->setRange(0, 1023);
 
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlotSecond->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlotSecond->xAxis2,
