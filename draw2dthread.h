@@ -10,6 +10,7 @@ class Draw2DThread : public QThread
 public:
     explicit Draw2DThread(QObject *parent = 0);
     void run();
+    QMutex mutex;
 
 signals:
     void draw2D();

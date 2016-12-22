@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    scene = new QGraphicsScene(0,0,150,150);
+    scene = new QGraphicsScene(0, 0, 250, 250);
     ui->xyCoordinates->setScene(scene);
 
     connectionTh = new ConnectionThread(this);
@@ -51,8 +51,10 @@ MainWindow::MainWindow(QWidget *parent) :
             SLOT(setRange(QCPRange)));
     connect(&dataTimerFirst, SIGNAL(timeout()), this, SLOT(realtimeDataSlotFirst()));
     connect(&dataTimerSecond, SIGNAL(timeout()), this, SLOT(realtimeDataSlotSecond()));
+
     dataTimerFirst.start();
     dataTimerSecond.start();
+
     //Mutlu Polatcan
     qDebug("Running GUI thread");
     connectionTh->start();
@@ -64,23 +66,26 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::update2DCoordinates(){
-    QPen pen = QPen(Qt::black);
-    QBrush brush = QBrush(Qt::black);
+    const QPen pen(Qt::black);
+    const QBrush brush(Qt::black);
 
-    qDebug("geldim çizerim");
-    //mutex.lock();
-    scene->addEllipse(xMotor,yMotor,20,20,pen,brush);
-    //mutex.unlock();
-
-
-
-        scene->clear();
-
-
+    while(true)
+    {
+        QGraphicsScene scen(0, 0, 250, 250);
+        mutex.lock();
+        scen.addEllipse(xMotor, yMotor,10, 10);
+        mutex.unlock();
+        ui->xyCoordinates->setScene(&scen);
+        QThread::msleep(15);
+    }
 }
 
 
 void MainWindow::isConnect() {
+
+    qDebug("geldim baglanirim");
+
+
     int i = 0,
             n,
             x = 0,
@@ -93,7 +98,6 @@ void MainWindow::isConnect() {
 
     unsigned char buf[2];
 
-    mutex.lock();
     if (RS232_OpenComport(cport_nr, bdrate, mode)) {
         //connection yoksa bi şey yap.
         qDebug("Can not open comport\n");
@@ -114,13 +118,15 @@ void MainWindow::isConnect() {
                     str[i - 1] = 0;
                     i = 0;
 
+                    mutex.lock();
                     xPanel = atoi(strtok(str, ","));
                     yPanel = atoi(strtok(NULL, ","));
                     xMotor = atoi(strtok(NULL, ","));
                     char *temp = strtok(NULL, ",");
                     yMotor = atoi(temp);
-                    //connect(drawingTh,SIGNAL(draw2D()),this,SLOT(update2DCoordinates()));
-                    qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
+                    mutex.unlock();
+                    //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
+                    qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
                 }
             }
@@ -139,7 +145,9 @@ void MainWindow::isConnect() {
 
         RS232_cputs(cport_nr, str);
     }
-    mutex.unlock();
+
+
+    qDebug("geldim baglanirim");
 }
 
 void MainWindow::realtimeDataSlotFirst() {

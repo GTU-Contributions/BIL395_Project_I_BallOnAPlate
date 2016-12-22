@@ -3,7 +3,7 @@
 Draw2DThread::Draw2DThread(QObject *parent ):
     QThread(parent)
 {
-
+    //
 }
 
 void Draw2DThread::run()
