@@ -51,7 +51,7 @@ private slots:
     void on_resetBalance_clicked();
     void on_drawCircle_clicked();
     void on_drawSquare_clicked();
-    void on_drawRectangle_clicked();
+    void on_drawRect_clicked();
 };
 
 #endif // MAINWINDOW_H

@@ -212,8 +212,6 @@ void MainWindow::on_resetBalance_clicked()
     strcpy(message,"reset");
 }
 
-
-
 void MainWindow::on_drawCircle_clicked()
 {
     strcpy(message,"circle");
