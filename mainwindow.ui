@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1820</width>
-    <height>1110</height>
+    <width>1200</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="cursor">
@@ -94,6 +94,16 @@
     <property name="title">
      <string>X-Y Coordinates</string>
     </property>
+    <widget class="QGraphicsView" name="xyCoordinates">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>281</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
@@ -142,7 +152,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1820</width>
+     <width>1200</width>
      <height>20</height>
     </rect>
    </property>

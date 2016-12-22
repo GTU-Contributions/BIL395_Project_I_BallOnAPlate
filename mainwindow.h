@@ -9,6 +9,8 @@
 #include "connectionthread.h"
 #include "qcustomplot.h"
 #include "drawer.h"
+#include "draw2dthread.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -21,20 +23,28 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     ConnectionThread *connectionTh;
-    //GetDataThread *getDataTh;
+    Draw2DThread *drawingTh;
+
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene ;
+    QMutex mutex;
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
     Drawer * drawer;
-    qreal xCoor;
-    qreal yCoor;
+    int xPanel;
+    int yPanel;
+    int xMotor;
+    int yMotor;
+    int sentX;
+    int sentY;
+
 
 public slots:
     void isConnect();
-   //void updateXYCoordinates(qreal x, qreal y);
+    void update2DCoordinates();
+
 
 private slots:
     void realtimeDataSlotFirst();

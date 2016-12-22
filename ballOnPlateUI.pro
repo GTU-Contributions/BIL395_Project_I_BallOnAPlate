@@ -5,7 +5,6 @@
 #-------------------------------------------------
 
 QT       += core gui
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = ballOnPlateUI
@@ -24,16 +23,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp \
     mainwindow.cpp \
-    getdatathread.cpp \
     connectionthread.cpp \
     qcustomplot.cpp \
-    drawer.cpp
+    drawer.cpp \
+    rs232.c \
+    draw2dthread.cpp
 
 HEADERS  += mainwindow.h \
     drawxycoorthread.h \
-    getdatathread.h \
     connectionthread.h \
     qcustomplot.h \
-    drawer.h
+    drawer.h \
+    rs232.h \
+    draw2dthread.h
 
 FORMS    += mainwindow.ui

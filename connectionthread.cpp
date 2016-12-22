@@ -8,4 +8,5 @@ ConnectionThread::ConnectionThread(QObject *parent):
 
 void ConnectionThread::run(){
 
+    emit startConnection();
 }
