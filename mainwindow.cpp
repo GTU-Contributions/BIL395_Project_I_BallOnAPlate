@@ -76,9 +76,6 @@ void MainWindow::pathDrawer()
 
 void MainWindow::isConnect() {
 
-    qDebug("geldim baglanirim");
-
-
     int i = 0,
             n,
             cport_nr = 24,        /* /dev/ttyS0 (COM1 on windows) */
@@ -227,7 +224,7 @@ void MainWindow::on_drawSquare_clicked()
     strcpy(message,"square");
 }
 
-void MainWindow::on_drawRectangle_clicked()
+void MainWindow::on_drawRect_clicked()
 {
     strcpy(message,"rect");
 }
