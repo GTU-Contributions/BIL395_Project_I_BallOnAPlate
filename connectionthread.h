@@ -18,8 +18,6 @@ class ConnectionThread : public QThread
 public:
     explicit ConnectionThread(QObject *parent = 0);
     void run();
-private:
-    QMutex mutex;
 signals:
     void startConnection();
 public slots:

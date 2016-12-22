@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>1000</height>
+    <width>1189</width>
+    <height>735</height>
    </rect>
   </property>
   <property name="cursor">
@@ -99,7 +99,7 @@
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>250</width>
+       <width>281</width>
        <height>250</height>
       </rect>
      </property>
@@ -108,8 +108,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>330</y>
+      <x>340</x>
+      <y>30</y>
       <width>83</width>
       <height>23</height>
      </rect>
@@ -121,10 +121,10 @@
    <widget class="QGraphicsView" name="shapeDrawer">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>370</y>
-      <width>461</width>
-      <height>381</height>
+      <x>80</x>
+      <y>390</y>
+      <width>421</width>
+      <height>281</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -146,13 +146,65 @@
      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="resetBalance">
+    <property name="geometry">
+     <rect>
+      <x>329</x>
+      <y>80</y>
+      <width>110</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset Balance</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="drawCircle">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>120</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Draw Circle</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="drawSquare">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>160</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Draw Square</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="drawRectangle">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>190</y>
+      <width>80</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Draw Rectangle</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
+     <width>1189</width>
      <height>20</height>
     </rect>
    </property>

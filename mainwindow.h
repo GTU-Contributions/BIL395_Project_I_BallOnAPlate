@@ -9,7 +9,7 @@
 #include "connectionthread.h"
 #include "qcustomplot.h"
 #include "drawer.h"
-#include "draw2dthread.h"
+#include "scene2d.h"
 
 namespace Ui {
 class MainWindow;
@@ -23,32 +23,35 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     ConnectionThread *connectionTh;
-    Draw2DThread *drawingTh;
-
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene ;
+    Scene2d *scene2d;
+    Drawer * drawer;
     QMutex mutex;
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
-    Drawer * drawer;
-    int xPanel;
-    int yPanel;
+    QTimer timer2d;
+    int xPanel = 500;
+    int yPanel = 500;
     int xMotor;
     int yMotor;
     int sentX;
     int sentY;
-
+    char message[64];
 
 public slots:
     void isConnect();
-    void update2DCoordinates();
-
 
 private slots:
     void realtimeDataSlotFirst();
     void realtimeDataSlotSecond();
+    void update2DCoordinates();
+    void pathDrawer();
+    void on_resetBalance_clicked();
+    void on_drawCircle_clicked();
+    void on_drawSquare_clicked();
+    void on_drawRectangle_clicked();
 };
 
 #endif // MAINWINDOW_H

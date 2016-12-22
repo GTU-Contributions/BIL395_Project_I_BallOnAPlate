@@ -13,6 +13,17 @@ public:
     virtual void mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     virtual void mouseMoveEvent( QGraphicsSceneMouseEvent * mouseEvent );
     void draw();
+    bool getFinishPath();
+    bool getBallOnPlate();
+    int getPanelX();
+    int getPanelY();
+    int getMouseX();
+    int getMouseY();
+    void setMouseX(int x);
+    void setMouseY(int y);
+    void setBallOnPlate(bool onPlate);
+    void setPanel(int x, int y);
+
     const qreal LEFT_BORDER = 0;
     const qreal RIGHT_BORDER = 400;
     const qreal TOP_BORDER = 0;
@@ -25,10 +36,19 @@ private:
     QPointF collision(QPointF &point);
     QPointF collision(qreal x, qreal y);
 
+    qreal coordinateToPositionX(int x);
+    qreal coordinateToPositionY(int y);
+
     int positionToCoordinateX(qreal x);
     int positionToCoordinateY(qreal y);
     QPoint positionToCoordinate(QPointF &point);
 
+    int panelX;
+    int panelY;
+
+    int mouseX = 0;
+    int mouseY = 0;
+    bool ballOnPlate = false;
     bool closeToStartPoint = false;
     bool finishPath = false;
     QList<QPointF> path;

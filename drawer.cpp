@@ -25,10 +25,6 @@ void Drawer::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         finishPath = false;
     }
 
-    draw();
-    QString coordinates = QString("X: ") + QString::number(positionToCoordinateX(mouseEvent->scenePos().x())) + QString(" Y: ") + QString::number(positionToCoordinateX(mouseEvent->scenePos().y()));
-    this->addText(coordinates);
-
     QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }
 
@@ -42,10 +38,8 @@ void Drawer::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
         else
             closeToStartPoint = false;
     }
-
-    draw();
-    QString coordinates = QString("X: ") + QString::number(positionToCoordinateX(mouseEvent->scenePos().x())) + QString(" Y: ") + QString::number(positionToCoordinateX(mouseEvent->scenePos().y()));
-    this->addText(coordinates);
+    setMouseX(positionToCoordinateX(mouseEvent->scenePos().x()));
+    setMouseY(positionToCoordinateY(mouseEvent->scenePos().y()));
 
     QGraphicsScene::mouseMoveEvent(mouseEvent);
 }
@@ -76,7 +70,82 @@ void Drawer::draw(){
             this->addEllipse(path.at(0).x()-MAX_RADIUS, path.at(0).y()-MAX_RADIUS, 2*MAX_RADIUS, 2*MAX_RADIUS, startPointPen, startPointBrush);
         else
             this->addEllipse(path.at(0).x()-POINT_RADIUS, path.at(0).y()-POINT_RADIUS, 2*POINT_RADIUS, 2*POINT_RADIUS, startPointPen, startPointBrush);
+
+        if(finishPath && getBallOnPlate()){
+            QPen ballPen(Qt::blue);
+            QBrush ballBrush(Qt::blue);
+
+            this->addEllipse(coordinateToPositionX(getPanelX())-POINT_RADIUS, coordinateToPositionY(getPanelY())-POINT_RADIUS, 2*POINT_RADIUS, 2*POINT_RADIUS, ballPen, ballBrush);
+        }
     }
+    QString coordinates = QString("X: ") + QString::number(getMouseX()) + QString(" Y: ") + QString::number(getMouseY());
+    this->addText(coordinates);
+}
+
+bool Drawer::getFinishPath()
+{
+    return finishPath;
+}
+
+bool Drawer::getBallOnPlate()
+{
+    return ballOnPlate;
+}
+
+int Drawer::getPanelX()
+{
+    return panelX;
+}
+
+int Drawer::getPanelY()
+{
+    return panelY;
+}
+
+int Drawer::getMouseX()
+{
+    return mouseX;
+}
+
+int Drawer::getMouseY()
+{
+    return mouseY;
+}
+
+void Drawer::setMouseX(int x)
+{
+    mouseX = x;
+}
+
+void Drawer::setMouseY(int y)
+{
+    mouseY = y;
+}
+
+void Drawer::setBallOnPlate(bool onPlate)
+{
+    ballOnPlate = onPlate;
+}
+
+void Drawer::setPanel(int x, int y)
+{
+    ballOnPlate = true;
+    panelX = x;
+    panelY = y;
+}
+
+qreal Drawer::coordinateToPositionX(int x)
+{
+    const qreal X_MAX = 1000;
+    //return (x-LEFT_BORDER)*(RIGHT_BORDER-LEFT_BORDER)/X_MAX;
+    return LEFT_BORDER + x*(RIGHT_BORDER-LEFT_BORDER)/X_MAX;
+}
+
+qreal Drawer::coordinateToPositionY(int y)
+{
+    const qreal Y_MAX = 1000;
+    //return (y-TOP_BORDER)*(BOTTOM_BORDER-TOP_BORDER)/Y_MAX;
+    return TOP_BORDER + y*(BOTTOM_BORDER-TOP_BORDER)/Y_MAX;
 }
 
 qreal Drawer::collisionX(qreal x)

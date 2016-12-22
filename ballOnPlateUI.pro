@@ -27,7 +27,7 @@ SOURCES += main.cpp \
     qcustomplot.cpp \
     drawer.cpp \
     rs232.c \
-    draw2dthread.cpp
+    scene2d.cpp
 
 HEADERS  += mainwindow.h \
     drawxycoorthread.h \
@@ -35,6 +35,6 @@ HEADERS  += mainwindow.h \
     qcustomplot.h \
     drawer.h \
     rs232.h \
-    draw2dthread.h
+    scene2d.h
 
 FORMS    += mainwindow.ui

@@ -6,21 +6,18 @@ MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow) {
     ui->setupUi(this);
-    scene = new QGraphicsScene(0, 0, 250, 250);
-    ui->xyCoordinates->setScene(scene);
-
-    connectionTh = new ConnectionThread(this);
-    drawingTh = new Draw2DThread(this);
-    connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
-    connect(drawingTh,SIGNAL(draw2D()),this,SLOT(update2DCoordinates()), Qt::DirectConnection);
-
-    //Kaan Uçar
+    //Kaan Ucar
     drawer = new Drawer(this);
     ui->shapeDrawer->setScene(drawer);
     ui->shapeDrawer->setRenderHint(QPainter::Antialiasing);
-    QPen blackPen(Qt::black);
-    blackPen.setWidth(2);
-    //Kaan Uçar
+
+    scene2d = new Scene2d(this);
+    ui->xyCoordinates->setScene(scene2d);
+    ui->xyCoordinates->setRenderHint(QPainter::Antialiasing);
+    //Kaan Ucar
+
+    connectionTh = new ConnectionThread(this);
+    connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
 
     //Mutlu Polatcan
     ui->customPlot->addGraph(); // blue line
@@ -49,16 +46,19 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->yAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlotSecond->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlotSecond->yAxis2,
             SLOT(setRange(QCPRange)));
-    connect(&dataTimerFirst, SIGNAL(timeout()), this, SLOT(realtimeDataSlotFirst()));
-    connect(&dataTimerSecond, SIGNAL(timeout()), this, SLOT(realtimeDataSlotSecond()));
 
     dataTimerFirst.start();
     dataTimerSecond.start();
+    timer2d.start();
+    timer2d.setInterval(17);
 
-    //Mutlu Polatcan
-    qDebug("Running GUI thread");
+    connect(&dataTimerFirst, SIGNAL(timeout()), this, SLOT(realtimeDataSlotFirst()));
+    connect(&dataTimerSecond, SIGNAL(timeout()), this, SLOT(realtimeDataSlotSecond()));
+    connect(&timer2d, SIGNAL(timeout()), this, SLOT(update2DCoordinates()));
+    connect(&timer2d, SIGNAL(timeout()), this, SLOT(pathDrawer()));
+
+    strcpy(message, "default");
     connectionTh->start();
-    drawingTh->start();
 }
 
 MainWindow::~MainWindow() {
@@ -66,20 +66,13 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::update2DCoordinates(){
-    const QPen pen(Qt::black);
-    const QBrush brush(Qt::black);
-
-    while(true)
-    {
-        QGraphicsScene scen(0, 0, 250, 250);
-        mutex.lock();
-        scen.addEllipse(xMotor, yMotor,10, 10);
-        mutex.unlock();
-        ui->xyCoordinates->setScene(&scen);
-        QThread::msleep(15);
-    }
+    scene2d->draw();
 }
 
+void MainWindow::pathDrawer()
+{
+    drawer->draw();
+}
 
 void MainWindow::isConnect() {
 
@@ -88,8 +81,6 @@ void MainWindow::isConnect() {
 
     int i = 0,
             n,
-            x = 0,
-            y = 0,
             cport_nr = 24,        /* /dev/ttyS0 (COM1 on windows) */
             bdrate = 115200;       /* 115200 baud */
 
@@ -122,9 +113,13 @@ void MainWindow::isConnect() {
                     xPanel = atoi(strtok(str, ","));
                     yPanel = atoi(strtok(NULL, ","));
                     xMotor = atoi(strtok(NULL, ","));
+
                     char *temp = strtok(NULL, ",");
                     yMotor = atoi(temp);
+                    scene2d->setPanel(xPanel, yPanel);
+                    drawer->setPanel(xPanel, yPanel);
                     mutex.unlock();
+
                     //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
                     qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
@@ -134,16 +129,9 @@ void MainWindow::isConnect() {
 
         //arduinodan gelen veriler strde
 
-        sprintf(str, "%4d.%4d", x, y);
-        ++x;
-        ++y;
 
-        if (x == 1000) {
-            x = 0;
-            y = 0;
-        }
 
-        RS232_cputs(cport_nr, str);
+        RS232_cputs(cport_nr, message);
     }
 
 
@@ -221,3 +209,25 @@ void MainWindow::realtimeDataSlotSecond() {
     }
 }
 
+
+void MainWindow::on_resetBalance_clicked()
+{
+    strcpy(message,"reset");
+}
+
+
+
+void MainWindow::on_drawCircle_clicked()
+{
+    strcpy(message,"circle");
+}
+
+void MainWindow::on_drawSquare_clicked()
+{
+    strcpy(message,"square");
+}
+
+void MainWindow::on_drawRectangle_clicked()
+{
+    strcpy(message,"rect");
+}
