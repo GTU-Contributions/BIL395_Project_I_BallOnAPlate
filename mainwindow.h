@@ -36,6 +36,7 @@ private:
     int yPanel = 500;
     int xMotor;
     int yMotor;
+
     int sentX;
     int sentY;
     char message[64];

@@ -15,6 +15,7 @@ public:
     void draw();
     bool getFinishPath();
     bool getBallOnPlate();
+    bool isPathReady();//returns true only once
     int getPanelX();
     int getPanelY();
     int getMouseX();
@@ -23,11 +24,12 @@ public:
     void setMouseY(int y);
     void setBallOnPlate(bool onPlate);
     void setPanel(int x, int y);
+    QList<QPoint> getPathList();
 
     const qreal LEFT_BORDER = 0;
-    const qreal RIGHT_BORDER = 400;
+    const qreal RIGHT_BORDER = 440;
     const qreal TOP_BORDER = 0;
-    const qreal BOTTOM_BORDER = 400;
+    const qreal BOTTOM_BORDER = 320;
     const qreal POINT_RADIUS = 10;
     const qreal MAX_RADIUS = 20; //MAX_RADIUS >= 2*POINT_RADIUS
 private:
@@ -41,13 +43,15 @@ private:
 
     int positionToCoordinateX(qreal x);
     int positionToCoordinateY(qreal y);
-    QPoint positionToCoordinate(QPointF &point);
+    QPoint positionToCoordinate(const QPointF &point);
 
     int panelX;
     int panelY;
 
     int mouseX = 0;
     int mouseY = 0;
+
+    bool pathReady = false;
     bool ballOnPlate = false;
     bool closeToStartPoint = false;
     bool finishPath = false;

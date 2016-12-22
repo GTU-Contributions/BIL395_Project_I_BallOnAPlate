@@ -121,7 +121,7 @@ void MainWindow::isConnect() {
                     mutex.unlock();
 
                     //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
-                    qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
+                    //qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
                 }
             }
@@ -129,8 +129,11 @@ void MainWindow::isConnect() {
 
         //arduinodan gelen veriler strde
 
-
-
+        if(drawer->isPathReady()){
+            QList<QPoint> list = drawer->getPathList();
+            for(int i=0;i<list.size();++i)
+                qDebug("x %d  y %d",list.at(i).x(),list.at(i).y());
+        }
         RS232_cputs(cport_nr, message);
     }
 

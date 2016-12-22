@@ -12,6 +12,7 @@ void Drawer::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         if(closeToStartPoint){
             closeToStartPoint = false;
             finishPath = true;
+            pathReady = true;
         }
         else{
             QPointF point = mouseEvent->scenePos();
@@ -92,6 +93,16 @@ bool Drawer::getBallOnPlate()
     return ballOnPlate;
 }
 
+bool Drawer::isPathReady()//returns true only once
+{
+    if(pathReady){
+        pathReady = false;
+        return true;
+    }
+
+    return false;
+}
+
 int Drawer::getPanelX()
 {
     return panelX;
@@ -132,6 +143,15 @@ void Drawer::setPanel(int x, int y)
     ballOnPlate = true;
     panelX = x;
     panelY = y;
+}
+
+QList<QPoint> Drawer::getPathList()
+{
+    QList<QPoint> list;
+    for(int i=0;i<path.size();++i)
+        list.append(positionToCoordinate(path.at(i)));
+
+    return list;
 }
 
 qreal Drawer::coordinateToPositionX(int x)
@@ -192,7 +212,7 @@ int Drawer::positionToCoordinateY(qreal y)
     return TOP_BORDER + y*Y_MAX/(BOTTOM_BORDER-TOP_BORDER);
 }
 
-QPoint Drawer::positionToCoordinate(QPointF &point){
+QPoint Drawer::positionToCoordinate(const QPointF &point){
     return QPoint(positionToCoordinateX(point.x()), positionToCoordinateY(point.y()));
 }
 
