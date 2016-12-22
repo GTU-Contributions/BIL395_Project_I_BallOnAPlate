@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1189</width>
-    <height>735</height>
+    <width>1335</width>
+    <height>1041</height>
    </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="cursor">
    <cursorShape>ArrowCursor</cursorShape>
@@ -22,8 +28,8 @@
      <rect>
       <x>800</x>
       <y>10</y>
-      <width>361</width>
-      <height>501</height>
+      <width>481</width>
+      <height>931</height>
      </rect>
     </property>
     <property name="title">
@@ -32,7 +38,7 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>190</x>
        <y>20</y>
        <width>91</width>
        <height>16</height>
@@ -45,8 +51,8 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>240</y>
+       <x>200</x>
+       <y>470</y>
        <width>91</width>
        <height>16</height>
       </rect>
@@ -66,8 +72,8 @@
       <rect>
        <x>40</x>
        <y>40</y>
-       <width>256</width>
-       <height>192</height>
+       <width>420</width>
+       <height>420</height>
       </rect>
      </property>
     </widget>
@@ -75,9 +81,9 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>270</y>
-       <width>256</width>
-       <height>192</height>
+       <y>490</y>
+       <width>420</width>
+       <height>420</height>
       </rect>
      </property>
     </widget>
@@ -87,8 +93,8 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>300</width>
-      <height>300</height>
+      <width>611</width>
+      <height>531</height>
      </rect>
     </property>
     <property name="title">
@@ -97,20 +103,23 @@
     <widget class="QGraphicsView" name="xyCoordinates">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>50</x>
        <y>30</y>
-       <width>281</width>
-       <height>250</height>
+       <width>530</width>
+       <height>490</height>
       </rect>
+     </property>
+     <property name="resizeAnchor">
+      <enum>QGraphicsView::NoAnchor</enum>
      </property>
     </widget>
    </widget>
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>30</y>
-      <width>83</width>
+      <x>640</x>
+      <y>10</y>
+      <width>110</width>
       <height>23</height>
      </rect>
     </property>
@@ -118,53 +127,53 @@
      <string>3D</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="shapeDrawer">
+   <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>390</y>
-      <width>421</width>
-      <height>281</height>
+      <x>20</x>
+      <y>560</y>
+      <width>471</width>
+      <height>391</height>
      </rect>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
+    <property name="title">
+     <string>Game Area</string>
     </property>
-    <property name="cursor" stdset="0">
-     <cursorShape>CrossCursor</cursorShape>
-    </property>
-    <property name="mouseTracking">
-     <bool>true</bool>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignJustify|Qt::AlignVCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="resetBalance">
-    <property name="geometry">
-     <rect>
-      <x>329</x>
-      <y>80</y>
-      <width>110</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Reset Balance</string>
-    </property>
+    <widget class="QGraphicsView" name="shapeDrawer">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>450</width>
+       <height>350</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>CrossCursor</cursorShape>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="drawCircle">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>120</y>
-      <width>80</width>
+      <x>640</x>
+      <y>90</y>
+      <width>110</width>
       <height>23</height>
      </rect>
     </property>
@@ -175,9 +184,9 @@
    <widget class="QPushButton" name="drawSquare">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>160</y>
-      <width>80</width>
+      <x>640</x>
+      <y>130</y>
+      <width>110</width>
       <height>23</height>
      </rect>
     </property>
@@ -185,17 +194,30 @@
      <string>Draw Square</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="drawRectangle">
+   <widget class="QPushButton" name="drawRect">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>190</y>
-      <width>80</width>
+      <x>640</x>
+      <y>170</y>
+      <width>110</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
      <string>Draw Rectangle</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="resetBalance">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>50</y>
+      <width>110</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Reset Balance</string>
     </property>
    </widget>
   </widget>
@@ -204,7 +226,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1189</width>
+     <width>1335</width>
      <height>20</height>
     </rect>
    </property>
