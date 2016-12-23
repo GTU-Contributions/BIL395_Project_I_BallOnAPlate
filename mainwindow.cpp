@@ -71,7 +71,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&timer2d, SIGNAL(timeout()), this, SLOT(update2DCoordinates()));
     serverTh = new ConnectionThread(this);
     connect(serverTh, SIGNAL(startConnection()), this, SLOT(startServer()), Qt::DirectConnection);
-    strcpy(message, "default");
+
+
+    sentX= 486;
+    sentY= 523;
+    sprintf(message, "%4d,%4d",sentX,sentY);
     connectionTh->start();
     serverTh->start();
 }
@@ -193,8 +197,7 @@ void MainWindow::isConnect() {
 
                     mutex.unlock();
 
-
-                    //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
+                    qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
                     //qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
                 }
@@ -301,8 +304,6 @@ void MainWindow::on_resetBalance_clicked()
 {
     strcpy(message,"reset");
 }
-
-
 
 void MainWindow::on_drawCircle_clicked()
 {
