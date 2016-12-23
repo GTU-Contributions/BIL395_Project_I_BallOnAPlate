@@ -43,7 +43,7 @@ private:
 
     int positionToCoordinateX(qreal x);
     int positionToCoordinateY(qreal y);
-    QPoint positionToCoordinate(/*const*/ QPointF &point);
+    QPoint positionToCoordinate(const QPointF &point);
 
     int panelX;
     int panelY;
@@ -51,7 +51,7 @@ private:
     int mouseX = 0;
     int mouseY = 0;
 
-    //bool pathReady = false;
+    bool pathReady = false;
     bool ballOnPlate = false;
     bool closeToStartPoint = false;
     bool finishPath = false;

@@ -92,7 +92,7 @@ bool Drawer::getBallOnPlate()
 {
     return ballOnPlate;
 }
-/*
+
 bool Drawer::isPathReady()//returns true only once
 {
     if(pathReady){
@@ -102,7 +102,7 @@ bool Drawer::isPathReady()//returns true only once
 
     return false;
 }
-*/
+
 int Drawer::getPanelX()
 {
     return panelX;
@@ -144,7 +144,7 @@ void Drawer::setPanel(int x, int y)
     panelX = x;
     panelY = y;
 }
-/*
+
 QList<QPoint> Drawer::getPathList()
 {
     QList<QPoint> list;
@@ -153,7 +153,7 @@ QList<QPoint> Drawer::getPathList()
 
     return list;
 }
-*/
+
 qreal Drawer::coordinateToPositionX(int x)
 {
     const qreal X_MAX = 1000;
@@ -212,7 +212,7 @@ int Drawer::positionToCoordinateY(qreal y)
     return TOP_BORDER + y*Y_MAX/(BOTTOM_BORDER-TOP_BORDER);
 }
 
-QPoint Drawer::positionToCoordinate(/*const*/ QPointF &point){
+QPoint Drawer::positionToCoordinate(const QPointF &point){
     return QPoint(positionToCoordinateX(point.x()), positionToCoordinateY(point.y()));
 }
 

@@ -17,10 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Kaan Ucar
 
     connectionTh = new ConnectionThread(this);
-    socketTh = new SocketThread(this);
     connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
-    connect(socketTh,SIGNAL(startSocket()), this, SLOT(socketConnect()), Qt::DirectConnection);
-
 
 
     //Mutlu Polatcan
@@ -197,7 +194,7 @@ void MainWindow::isConnect() {
 
                     mutex.unlock();
 
-                    qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
+                    //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
                     //qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
                 }
@@ -221,9 +218,6 @@ void MainWindow::isConnect() {
         }
         else
             RS232_cputs(cport_nr, message);
-    }
-
-
     }
 }
 
