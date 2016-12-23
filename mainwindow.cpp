@@ -17,7 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //Kaan Ucar
 
     connectionTh = new ConnectionThread(this);
+    socketTh = new SocketThread(this);
     connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
+    connect(socketTh,SIGNAL(startSocket()), this, SLOT(socketConnect()), Qt::DirectConnection);
 
 
 
@@ -111,9 +113,41 @@ void MainWindow::update2DCoordinates(){
     drawer->draw();
 }
 
-void MainWindow::isConnect() {
+void MainWindow::socketConnect(){
 
-    qDebug("geldim baglanirim");
+    qDebug("Geldim amk");
+
+    QTcpServer *server = new QTcpServer();
+    char str[64];
+
+    qDebug() << "Geldim ibne";
+
+    connect(server,SIGNAL(socketConnect()),this,SLOT(socketConnect()));
+
+    if(!server->listen(QHostAddress::Any,1234))
+    {
+        qDebug() << "Server could not start!";
+    }
+    else
+    {
+        qDebug() << "Server started" ;
+    }
+
+    QTcpSocket *socket = server->nextPendingConnection();
+
+    while (1)
+    {
+        sprintf(str,"%4d,%4d,%4d,%4d\r\n",xPanel,yPanel,xMotor,yMotor);
+        qDebug(str);
+
+        socket->write("str");
+        socket->flush();
+
+        socket->waitForBytesWritten(3000);
+    }
+}
+
+void MainWindow::isConnect() {
 
 
     int i = 0,
@@ -131,7 +165,7 @@ void MainWindow::isConnect() {
         qDebug("Can not open comport\n");
 
     }
-    qDebug("Thread is working..");
+
     while (1) {
         while (1) {
             n = RS232_PollComport(cport_nr, buf, 1);
@@ -146,6 +180,7 @@ void MainWindow::isConnect() {
                     str[i - 1] = 0;
                     i = 0;
 
+
                     mutex.lock();
                     xPanel = atoi(strtok(str, ","));
                     yPanel = atoi(strtok(NULL, ","));
@@ -155,7 +190,9 @@ void MainWindow::isConnect() {
                     yMotor = atoi(temp);
                     scene2d->setPanel(xPanel, yPanel);
                     drawer->setPanel(xPanel, yPanel);
+
                     mutex.unlock();
+
 
                     //qDebug("xPanel: %d,\t yPanel: %d,\t xMotor:%d,\t yMotor:%d", xPanel, yPanel, xMotor, yMotor);
                     //qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
@@ -184,8 +221,9 @@ void MainWindow::isConnect() {
     }
 
 
-    qDebug("geldim baglanirim");
+    }
 }
+
 
 void MainWindow::realtimeDataSlotFirst() {
     static QTime time(QTime::currentTime());

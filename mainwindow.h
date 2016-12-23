@@ -6,10 +6,22 @@
 #include "drawer.h"
 
 #include <QtCore>
+#include <QDebug>
+#include <QTcpServer>
+#include <QTcpSocket>
+
 #include "connectionthread.h"
 #include "qcustomplot.h"
 #include "drawer.h"
 #include "scene2d.h"
+#include "socketth.h"
+
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+#include "rs232.h"
 
 #include <QTcpServer>
 #include <QTcpSocket>
@@ -31,7 +43,7 @@ public:
 private:
     Ui::MainWindow *ui;
     Scene2d *scene2d;
-    Drawer * drawer;
+    Drawer *drawer;
     QMutex mutex;
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
@@ -49,6 +61,7 @@ private:
 
 public slots:
     void isConnect();
+    void socketConnect();
 
 private slots:
     void realtimeDataSlotFirst();
@@ -60,6 +73,7 @@ private slots:
     void on_drawCircle_clicked();
     void on_drawSquare_clicked();
     void on_drawRectangle_clicked();
+
 };
 
 #endif // MAINWINDOW_H
