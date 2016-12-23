@@ -81,7 +81,7 @@ void MainWindow::isConnect() {
 
     int i = 0,
             n,
-            cport_nr = 24,        /* /dev/ttyS0 (COM1 on windows) */
+            cport_nr = 25,        /* /dev/ttyS0 (COM1 on windows) */
             bdrate = 115200;       /* 115200 baud */
 
     char mode[] = {'8', 'N', '1', 0},
@@ -124,6 +124,11 @@ void MainWindow::isConnect() {
                     //qDebug("CONNECT xMotor:%d,\t yMotor:%d", xMotor, yMotor);
                     break;
                 }
+            }
+            else{
+                //qDebug("hello mutlu");
+                scene2d->setBallOnPlate(false);
+                drawer->setBallOnPlate(false);
             }
         }
 

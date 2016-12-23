@@ -32,8 +32,8 @@ private:
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
     QTimer timer2d;
-    int xPanel = 500;
-    int yPanel = 500;
+    int xPanel;
+    int yPanel;
     int xMotor;
     int yMotor;
 
