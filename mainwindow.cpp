@@ -19,6 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connectionTh = new ConnectionThread(this);
     connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
 
+
+
     //Mutlu Polatcan
     ui->customPlot->addGraph(); // blue line
     ui->customPlot->addGraph(); // red line
@@ -52,25 +54,60 @@ MainWindow::MainWindow(QWidget *parent) :
     timer2d.start();
     timer2d.setInterval(17);
 
+    server = new QTcpServer();
+    if(!server->listen(QHostAddress::Any,1234))
+    {
+        qDebug() << "Server could not start!";
+    }
+    else
+    {
+        qDebug() << "Server started" ;
+    }
+
     connect(&dataTimerFirst, SIGNAL(timeout()), this, SLOT(realtimeDataSlotFirst()));
     connect(&dataTimerSecond, SIGNAL(timeout()), this, SLOT(realtimeDataSlotSecond()));
     connect(&timer2d, SIGNAL(timeout()), this, SLOT(update2DCoordinates()));
-    connect(&timer2d, SIGNAL(timeout()), this, SLOT(pathDrawer()));
-
+    serverTh = new ConnectionThread(this);
+    connect(serverTh, SIGNAL(startConnection()), this, SLOT(startServer()), Qt::DirectConnection);
     strcpy(message, "default");
     connectionTh->start();
+    serverTh->start();
 }
 
 MainWindow::~MainWindow() {
     delete ui;
 }
 
-void MainWindow::update2DCoordinates(){
-    scene2d->draw();
+void MainWindow::startServer(){
+    qDebug("sadasd");
+    while(socket == NULL){
+        if(server->hasPendingConnections()){
+            qDebug("has connection");
+            QTcpSocket *socket = server->nextPendingConnection();
+            while(socket != NULL){
+            char str[64];
+                        memset(str,'\0',64);
+                        mutex.lock();
+                        sprintf(str,"%d,%d,%d,%d",xPanel,yPanel,xMotor,yMotor);
+                        mutex.unlock();
+                        socket->write(str, 64);
+                        socket->flush();
+                        socket->waitForBytesWritten(17);
+                        qDebug("server falan");
+             }
+        }
+    }
 }
 
-void MainWindow::pathDrawer()
-{
+void MainWindow::serverFunction(){
+    if(socket != NULL){
+
+    }
+
+}
+
+void MainWindow::update2DCoordinates(){
+    scene2d->draw();
     drawer->draw();
 }
 
@@ -81,7 +118,7 @@ void MainWindow::isConnect() {
 
     int i = 0,
             n,
-            cport_nr = 25,        /* /dev/ttyS0 (COM1 on windows) */
+            cport_nr = 24,        /* /dev/ttyS0 (COM1 on windows) */
             bdrate = 115200;       /* 115200 baud */
 
     char mode[] = {'8', 'N', '1', 0},
@@ -125,21 +162,25 @@ void MainWindow::isConnect() {
                     break;
                 }
             }
-            else{
+            /*else{
                 //qDebug("hello mutlu");
                 scene2d->setBallOnPlate(false);
                 drawer->setBallOnPlate(false);
-            }
+            }*/
         }
 
         //arduinodan gelen veriler strde
 
         if(drawer->isPathReady()){
+            char str[64];
             QList<QPoint> list = drawer->getPathList();
+            sprintf(str,"array-%d-",list.size());
+            RS232_cputs(cport_nr, str);
             for(int i=0;i<list.size();++i)
-                qDebug("x %d  y %d",list.at(i).x(),list.at(i).y());
+                sprintf(str,"%d,%d-",list.at(i).x(),list.at(i).y());
         }
-        RS232_cputs(cport_nr, message);
+        else
+            RS232_cputs(cport_nr, message);
     }
 
 

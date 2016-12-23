@@ -11,6 +11,10 @@
 #include "drawer.h"
 #include "scene2d.h"
 
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QDebug>
+
 namespace Ui {
 class MainWindow;
 }
@@ -23,7 +27,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     ConnectionThread *connectionTh;
-
+    ConnectionThread *serverTh;
 private:
     Ui::MainWindow *ui;
     Scene2d *scene2d;
@@ -32,6 +36,8 @@ private:
     QTimer dataTimerFirst;
     QTimer dataTimerSecond;
     QTimer timer2d;
+    QTcpServer *server;
+    QTcpSocket *socket = NULL;
     int xPanel;
     int yPanel;
     int xMotor;
@@ -48,7 +54,8 @@ private slots:
     void realtimeDataSlotFirst();
     void realtimeDataSlotSecond();
     void update2DCoordinates();
-    void pathDrawer();
+    void serverFunction();
+    void startServer();
     void on_resetBalance_clicked();
     void on_drawCircle_clicked();
     void on_drawSquare_clicked();
