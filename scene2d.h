@@ -16,9 +16,9 @@ public:
     void setBallOnPlate(bool onPlate);
     void setPanel(int x, int y);
     const qreal LEFT_BORDER = 0;
-    const qreal RIGHT_BORDER = 400;
+    const qreal RIGHT_BORDER = 480;
     const qreal TOP_BORDER = 0;
-    const qreal BOTTOM_BORDER = 400;
+    const qreal BOTTOM_BORDER = 460;
     const qreal BALL_RADIUS = 10;
 
 private:

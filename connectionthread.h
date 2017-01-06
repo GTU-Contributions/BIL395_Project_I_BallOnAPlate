@@ -2,15 +2,7 @@
 #define CONNECTIONTHREAD_H
 
 #include <QThread>
-#include <QtSerialPort/QSerialPort>
 #include <QtCore>
-
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
-#include "rs232.h"
 
 class ConnectionThread : public QThread
 {

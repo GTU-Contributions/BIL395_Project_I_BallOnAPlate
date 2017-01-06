@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = ballOnPlateUI
@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     qcustomplot.cpp \
     drawer.cpp \
     rs232.c \
-    scene2d.cpp
+    scene2d.cpp \
+    socketth.cpp
 
 HEADERS  += mainwindow.h \
     drawxycoorthread.h \
@@ -35,6 +36,7 @@ HEADERS  += mainwindow.h \
     qcustomplot.h \
     drawer.h \
     rs232.h \
-    scene2d.h
+    scene2d.h \
+    socketth.h
 
 FORMS    += mainwindow.ui
