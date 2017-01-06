@@ -153,7 +153,7 @@ void MainWindow::isConnect() {
 
     int i = 0,
             n,
-            cport_nr = 24,        /* /dev/ttyS0 (COM1 on windows) */
+            cport_nr = PORTNUMBER,        /* /dev/ttyS0 (COM1 on windows) */
             bdrate = 115200;       /* 115200 baud */
 
     char mode[] = {'8', 'N', '1', 0},
