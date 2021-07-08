@@ -1,0 +1,3 @@
+C:/Users/yunusS/Desktop/3DProject-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/yunusS/Desktop/3DProject-master/cmake-build-debug/CMakeFiles/Test.dir
+C:/Users/yunusS/Desktop/3DProject-master/cmake-build-debug/CMakeFiles/edit_cache.dir
