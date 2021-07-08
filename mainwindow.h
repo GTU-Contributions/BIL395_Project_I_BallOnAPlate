@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
     ConnectionThread *connectionTh;
     ConnectionThread *serverTh;
 private:
@@ -75,7 +76,6 @@ private slots:
     void on_drawCircle_clicked();
     void on_drawSquare_clicked();
     void on_drawRectangle_clicked();
-
 };
 
 #endif // MAINWINDOW_H

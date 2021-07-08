@@ -1,11 +1,13 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "qcustomplot.h"
 
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow) {
     ui->setupUi(this);
+
     //Kaan Ucar
     drawer = new Drawer(this);
     ui->shapeDrawer->setScene(drawer);
@@ -19,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connectionTh = new ConnectionThread(this);
     connect(connectionTh, SIGNAL(startConnection()), this, SLOT(isConnect()), Qt::DirectConnection);
 
-
     //Mutlu Polatcan
     ui->customPlot->addGraph(); // blue line
     ui->customPlot->addGraph(); // red line
@@ -32,12 +33,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QSharedPointer <QCPAxisTickerTime> timeTickerFirst(new QCPAxisTickerTime);
     QSharedPointer <QCPAxisTickerTime> timeTickerSecond(new QCPAxisTickerTime);
+
     timeTickerFirst->setTimeFormat("%h:%m:%s");
     timeTickerSecond->setTimeFormat("%h:%m:%s");
     ui->customPlot->xAxis->setTicker(timeTickerFirst);
     ui->customPlotSecond->xAxis->setTicker(timeTickerSecond);
     ui->customPlot->axisRect()->setupFullAxesBox();
     ui->customPlotSecond->axisRect()->setupFullAxesBox();
+
     ui->customPlot->yAxis->setRange(0, 1023);
     ui->customPlotSecond->yAxis->setRange(0, 800);
 
@@ -246,6 +249,7 @@ void MainWindow::realtimeDataSlotFirst() {
     static double lastFpsKey;
     static int frameCount;
     ++frameCount;
+
     if (key - lastFpsKey > 2) // average fps over 2 seconds
     {
         ui->statusBar->showMessage(
@@ -260,8 +264,8 @@ void MainWindow::realtimeDataSlotFirst() {
 void MainWindow::realtimeDataSlotSecond() {
     static QTime time(QTime::currentTime());
     // calculate two new data points:
-    double key = time.elapsed() / 1000.0; // time elapsed since start of demo, in seconds
 
+    double key = time.elapsed() / 1000.0; // time elapsed since start of demo, in seconds
     static double lastPointKey = 0;
     if (key - lastPointKey > 0.5) // at most add point every 2 ms
     {
@@ -281,6 +285,7 @@ void MainWindow::realtimeDataSlotSecond() {
     static double lastFpsKey;
     static int frameCount;
     ++frameCount;
+
     if (key - lastFpsKey > 2) // average fps over 2 seconds
     {
         ui->statusBar->showMessage(
@@ -292,7 +297,6 @@ void MainWindow::realtimeDataSlotSecond() {
         frameCount = 0;
     }
 }
-
 
 void MainWindow::on_resetBalance_clicked()
 {

@@ -38,5 +38,5 @@ HEADERS  += mainwindow.h \
     rs232.h \
     scene2d.h \
     socketth.h
-
+    
 FORMS    += mainwindow.ui
