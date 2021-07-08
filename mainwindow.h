@@ -18,8 +18,10 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+#define PORTNUMBER 2
 #else
 #include <unistd.h>
+#define PORTNUMBER 24
 #endif
 #include "rs232.h"
 
