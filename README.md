@@ -17,6 +17,10 @@ Team members:
 
 Project's Demo Video: https://www.youtube.com/watch?v=YKCav0eDshk
 
+## Description
+The goal of this project is to create a mechanism which will balance a ball on a plate. 
+We have used a touch panel which is our plate and is used to track the real-time coordinates of the ball. Two servo motors (one for X and one for Y coordinates) balance the ball by moving the panel according to the real-time location of the ball. The movement of each object (the plate, the ball and the servo motors) is mirrored in a 3D animation in real-time. The Ziegler-Nichols tuning method is used to keep the system in equilibrium. The communication between the Arduino and the user interface is achieved with the RS-232 communication standard, while the transmission of information between the user interface and the 3D module is achieved with a TCP socket. The project can run on Windows and Linux platforms.
+
 ## INSTALLATION GUIDE
 
 ## Installation of OpenSceneGraph for 3D Simulations
