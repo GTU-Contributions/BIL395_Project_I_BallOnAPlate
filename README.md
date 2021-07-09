@@ -3,7 +3,7 @@ Gebze Technical University
 
 Ball on a plate - Fall 2016
 
-Instructor: Erkan Zergeroglu
+Instructor: Prof. Dr. Erkan Zergeroglu
 
 Team members: 
 - Alper MÜLAYİM
