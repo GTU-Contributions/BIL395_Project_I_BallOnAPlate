@@ -1,4 +1,4 @@
-# BIL395 - Project I - Ball on a plate
+# CSE395 - Group Project I - Ball on a plate
 Gebze Technical University
 
 Ball on a plate - Fall 2016
